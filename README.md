@@ -40,8 +40,8 @@ frontend/
 
 ### Clone the repo
 ```bash
-git clone https://github.com/yourusername/event-management.git
-cd event-management/frontend
+git clone https://github.com/rohitdhawale07/event_booking_frontend.git
+cd event_booking_frontend
 ```
 
 ### Install dependencies
