@@ -1,73 +1,86 @@
-# React + TypeScript + Vite
+# 🎉 Event Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a **full-stack Event Management system** with:
+- A **React.js (TypeScript) frontend** for users and admins.
+- A **Node.js + Express + MongoDB backend** with JWT authentication.
 
-Currently, two official plugins are available:
+Users can **register, log in, book events, and manage their bookings**.  
+Admins can **create, edit, delete events, and view all bookings**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+# 🖥️ Frontend
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Tech Stack
+- ⚛️ React.js (with TypeScript)
+- 📦 Vite (or CRA depending on setup)
+- 🎨 Tailwind CSS
+- 🔄 React Router DOM
+- 🔑 JWT Authentication
+- ⚡ Axios (for API calls)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📂 Project Structure
+```bash
+frontend/
+│── src/
+│ ├── api/ # Axios instance & API helpers
+│ ├── components/ # Reusable UI components
+│ ├── pages/ # Login, Register, Dashboard, Events
+│ ├── App.tsx # Root component with routes
+│ └── main.tsx # Entry point
+│── public/ # Static assets
+│── package.json # Dependencies & scripts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Setup & Installation
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Clone the repo
+```bash
+git clone https://github.com/yourusername/event-management.git
+cd event-management/frontend
 ```
+
+### Install dependencies
+```bash
+npm install
+```
+### Configure environment variables
+Create a .env file in the frontend root:
+```bash
+VITE_API_URL=http://localhost:5000/api
+```
+
+### Run the development server
+```bash
+npm run dev
+```
+
+### Build for production
+```bash
+npm run build
+```
+### Preview production build
+```bash
+npm run preview
+```
+
+### 🔑 Authentication Flow
+- User logs in → gets JWT token from backend.
+- Token stored in localStorage.
+- Protected routes (/dashboard) check token.
+- Logout clears token.
+
+### 📸 Demo Credentials
+- Admin
+Email: admin@gmail.com
+Password: admin123
+
+### 📦 Deployment
+- Use Vercel / Netlify / Railway for hosting.
+- Make sure .env.production has the correct backend API URL.
+
+
