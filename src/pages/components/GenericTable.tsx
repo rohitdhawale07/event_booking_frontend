@@ -1,5 +1,4 @@
 import React from "react";
-import { Pencil, Trash2 } from "lucide-react"; // Lucide icons for edit/delete
 
 // Export TableColumn so other files can import it
 export interface TableColumn<T> {

@@ -3,7 +3,6 @@ import { api } from "../../api";
 import GenericTable, { type TableColumn, type TableOption } from "../components/GenericTable";
 import AddEventModal from "./AddEventModal";
 import { Pencil, Trash2, Book } from "lucide-react"; // Book icon
-import { type ReactNode } from "react";
 import BookEventModal from "./BookEventModal";
 import MyBookingsModal from "./MyBookingsModal";
 
@@ -40,7 +39,7 @@ const EventsTable: React.FC = () => {
 
   // For editing event
   const [editEventOpen, setEditEventOpen] = useState(false);
-  const [editEventId, setEditEventId] = useState<string | null>(null);
+  const [_editEventId, setEditEventId] = useState<string | null>(null);
   const [editEventData, setEditEventData] = useState<EventItem | null>(null);
 
   // Search state
@@ -50,7 +49,6 @@ const EventsTable: React.FC = () => {
   const userStr = localStorage.getItem("user");
   const userType = userStr ? JSON.parse(userStr).user_type : undefined;
   const token = userStr ? JSON.parse(userStr).token : undefined;
-  const userId = userStr ? JSON.parse(userStr)._id : undefined;
 
   // Fetch events
   const fetchEvents = async () => {
