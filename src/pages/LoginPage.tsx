@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../api";
 import { Eye, EyeOff } from "lucide-react";
 
-const Login: React.FC = () => {
+// Add props type
+interface LoginProps {
+  onLogin?: (token: string) => void; // optional callback
+}
+
+const Login: React.FC<LoginProps> = ({onLogin}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -24,10 +29,13 @@ const Login: React.FC = () => {
       const res = await api.post("/auth/login", { email, password });
 
       // use res.token instead of res.data.token
-      if (res.data && res.data?.token && res.data?.user_type) {
-        // Store the whole data object as a string in localStorage
+      if (res.data && res.data.token) {
         localStorage.setItem("user", JSON.stringify(res.data));
-        navigate("/dashboard"); // redirect after storing token
+
+        // Notify App about the new token
+        if (onLogin) onLogin(res.data.token);
+
+        navigate("/dashboard");
       } else {
         setError("Login failed. No token received.");
       }

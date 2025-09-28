@@ -72,7 +72,6 @@ const EventsTable: React.FC = () => {
   const fetchBookings = async () => {
     try {
       let data = await api.get("/bookings", token);
-      console.log("All bookings fetched:", data);
       setMyBookings(data);
     } catch (err: any) {
       console.error("Failed to fetch bookings", err);
