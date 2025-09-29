@@ -7,6 +7,7 @@ import { LogOut } from "lucide-react";
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [addEventOpen, setAddEventOpen] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   // Get user_type from localStorage
   const userStr = localStorage.getItem("user");
@@ -19,6 +20,10 @@ const Dashboard: React.FC = () => {
 
   const handleAddEventClick = () => {
     setAddEventOpen(true);
+  };
+
+    const handleEventAdded = () => {
+    setRefreshKey(prev => prev + 1); // 🔄 trigger rerender
   };
 
   return (
@@ -61,10 +66,13 @@ const Dashboard: React.FC = () => {
 
       {/* Content */}
       <main className="max-w-5xl mx-auto p-6">
-        <EventsTable />
+        <EventsTable refreshKey = {refreshKey} />
       </main>
 
-      <AddEventModal open={addEventOpen} onClose={() => setAddEventOpen(false)} />
+      <AddEventModal 
+      open={addEventOpen} 
+      onClose={() => setAddEventOpen(false)}
+      onEventAdded={handleEventAdded} />
     </div>
   );
 };

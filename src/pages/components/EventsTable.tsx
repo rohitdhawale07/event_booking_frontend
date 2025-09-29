@@ -17,6 +17,10 @@ export interface EventItem {
   bookingStatus?: string; // computed field for availability
 }
 
+interface EventsTableProps {
+  refreshKey?: number; // 🔑 add this
+}
+
 const eventColumns: TableColumn<EventItem>[] = [
   { label: "Title", accessor: "title" },
   { label: "Description", accessor: "description" },
@@ -27,7 +31,7 @@ const eventColumns: TableColumn<EventItem>[] = [
   { label: "Booking", accessor: "bookingStatus" },
 ];
 
-const EventsTable: React.FC = () => {
+const EventsTable: React.FC<EventsTableProps> = ({refreshKey}) => {
   const [events, setEvents] = useState<EventItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>("");
@@ -66,7 +70,7 @@ const EventsTable: React.FC = () => {
 
   useEffect(() => {
     fetchEvents();
-  }, []);
+  }, [refreshKey]);
 
   // Fetch bookings for badge count
   const fetchBookings = async () => {

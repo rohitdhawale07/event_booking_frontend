@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import Login from "./pages/LoginPage";
-import Register from "./pages/RegisterPage";
-import Dashboard from "./pages/HomePage";
+
+// lazy load pages
+const Login = lazy(()=>import("./pages/LoginPage"))
+const Register = lazy(()=>import("./pages/RegisterPage"))
+const Dashboard = lazy(()=>import("./pages/HomePage"))
 
 const App: React.FC = () => {
-  const [token, setToken] = useState<string | undefined>(undefined);
-
-  console.log(token)
-
-  // Read token from localStorage on mount
-  useEffect(() => {
+  // Initialize from localStorage immediately
+  const [token, setToken] = useState<string | undefined>(() => {
     const userStr = localStorage.getItem("user");
-    setToken(userStr ? JSON.parse(userStr).token : undefined);
-  }, []);
+    return userStr ? JSON.parse(userStr).token : undefined;
+  });
 
   return (
     <Router>
+      <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
       <Routes>
         <Route
           path="/"
@@ -29,6 +28,7 @@ const App: React.FC = () => {
           element={token ? <Dashboard /> : <Navigate to="/login" />}
         />
       </Routes>
+      </Suspense>
     </Router>
   );
 };

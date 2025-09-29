@@ -45,13 +45,13 @@ const MyBookingsModal: React.FC<MyBookingsModalProps> = ({ open, onClose, bookin
                 key={b._id}
                 className="p-4 rounded-lg border border-blue-100 bg-blue-50 shadow-sm"
               >
-                <h4 className="font-semibold text-blue-800">{b.event.title}</h4>
-                <p className="text-sm text-gray-600">{b.event.description}</p>
+                <h4 className="font-semibold text-blue-800">{b.event?.title}</h4>
+                <p className="text-sm text-gray-600">{b.event?.description}</p>
                 <p className="text-sm text-gray-700">
-                  📍 {b.event.location}
+                  📍 {b.event?.location}
                 </p>
                 <p className="text-sm text-gray-700">
-                  📅 {new Date(b.event.date).toLocaleDateString()}
+                  📅 {new Date(b.event?.date).toLocaleDateString()}
                 </p>
                 <p className="text-sm text-gray-700">
                   🎟 Seats booked: <span className="font-bold">{b.seats}</span>
@@ -59,7 +59,7 @@ const MyBookingsModal: React.FC<MyBookingsModalProps> = ({ open, onClose, bookin
                 <p className="text-xs text-gray-500">
                   Booked at: {new Date(b.bookedAt).toLocaleString()}
                 </p>
-                {userType === "admin" && b.event && (
+                {userType === "admin" && b.user && (
                   <p>
                     <span className="font-semibold">Booked by:</span>{" "}
                     {b.user.name} ({b.user.email})
